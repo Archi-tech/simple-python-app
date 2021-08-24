@@ -1,0 +1,15 @@
+# Created according to https://github.prod.hulu.com/Build/Norfolk/blob/master/README.md
+# Used to describe test and build steps for Jenkins(Norfolk)
+version: v0.1
+build:
+  - type: docker
+    dockerfile: Dockerfile
+    name: Build
+    imageName: language-choice-python-flask
+notify:
+  - type: slack
+    event: fail
+    message: "language-choice-python-flask Norfolk Build for branch *${BRANCH_NAME}* <${BUILD_URL}|#${BUILD_NUMBER}> has failed"
+    channels:
+      - supportdev
+    branch: master
